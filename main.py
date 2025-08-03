@@ -90,25 +90,7 @@ async def stop_bot():
 
 async def main():
     if WEBHOOK:
-    app_runner = web.AppRunner(await
-     web_server())
-        # Start the web server
-        app_runner = web.AppRunner(await web_server())
-        await app_runner.setup()
-        site = web.TCPSite(app_runner, "0.0.0.0", PORT)
-        await site.start()
-        print(f"Web server started on port {PORT}")
-
-    # Start the bot
-    await start_bot()
-
-    # Keep the program running
-    try:
-        while True:
-            await asyncio.sleep(3600)  # Run forever, or until interrupted
-    except (KeyboardInterrupt, SystemExit):
-        await stop_bot()
-        
+    app_runner = web.AppRunner(await web_server())     
 class Data:
     START = (
         "🌟 Welcome {0}! 🌟\n\n"
