@@ -76,24 +76,9 @@ async def main():
     # Keep the program running
     try:
         while True:
-            await bot.polling()  # Run forever, or until interrupted
+            await asyncio.sleep(3600)
     except (KeyboardInterrupt, SystemExit):
-        await stop_bot()
-    
-
-async def start_bot():
-    await bot.start()
-    print("Bot is up and running")
-
-async def stop_bot():
-    await bot.stop()
-
-async def main():
-    if WEBHOOK:
-    app_runner = web.AppRunner(await web_server())
-    await app_runner.setup()
-    site = web.TCPSite(app_runner, "0.0.0.0", PORT)
-    await site.start()     
+        await stop_bot()     
 class Data:
     START = (
         "🌟 Welcome {0}! 🌟\n\n"
