@@ -89,7 +89,8 @@ async def stop_bot():
     await bot.stop()
 
 async def main():
-    if WEBHOOK:false
+    if WEBHOOK:
+    app_runner = web.AppRunner(await web_server())
         # Start the web server
         app_runner = web.AppRunner(await web_server())
         await app_runner.setup()
