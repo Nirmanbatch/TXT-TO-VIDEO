@@ -90,7 +90,10 @@ async def stop_bot():
 
 async def main():
     if WEBHOOK:
-    app_runner = web.AppRunner(await web_server())     
+    app_runner = web.AppRunner(await web_server())
+    await app_runner.setup()
+    site = web.TCPSite(app_runner, "0.0.0.0", PORT)
+    await site.start()     
 class Data:
     START = (
         "🌟 Welcome {0}! 🌟\n\n"
