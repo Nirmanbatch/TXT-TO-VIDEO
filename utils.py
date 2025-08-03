@@ -3,7 +3,6 @@ import random
 import time  
 import math  
 import os  
-from vars import CREDIT  
 from pyrogram.errors import FloodWait  
 from datetime import datetime,timedelta  
 
@@ -90,3 +89,4 @@ async def progress_bar(current, total, reply, start):
             )
         except FloodWait as e:
             time.sleep(e.x)
+
