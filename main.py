@@ -98,6 +98,7 @@ class Data:
     )
 # Define the start command handler
 @bot.on_message(filters.command("start"))
+@authorized_only
 async def start(client: Client, msg: Message):
     user = await client.get_me()
     mention = user.mention
@@ -671,8 +672,8 @@ async def txt_handler(bot: Client, m: Message):
 # Advance
 
 @bot.on_message(filters.command(["bravo"]) )
+@authorized_only
 async def txt_handler(bot: Client, m: Message):
-    @authorized_only
   editable = await m.reply_text(f"**📁Send me the TXT file and wait.**")
     input: Message = await bot.listen(editable.chat.id)
     x = await input.download()
@@ -918,6 +919,7 @@ async def txt_handler(bot: Client, m: Message):
 # Ankitshakya
 
 @bot.on_message(filters.command(["spidy"]))
+@authorized_user
 async def txt_handler(bot: Client, m: Message):
     editable = await m.reply_text(f"**🔹Send me the TXT file and wait.**")
     input: Message = await bot.listen(editable.chat.id)
