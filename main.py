@@ -26,6 +26,10 @@ from pyrogram.errors.exceptions.bad_request_400 import StickerEmojiInvalid
 from pyrogram.types.messages_and_media import message
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
+ALLOWED_USERS = [5076431214]  # <-- Apni ya jo bhi allowed user ke Telegram ID yahan daalni hai
+def is_authorized(user_id):
+    return user_id in ALLOWED_USERS
+
 # Initialize the bot
 bot = Client(
     "bot",
@@ -86,6 +90,9 @@ class Data:
 # Define the start command handler
 @bot.on_message(filters.command("start"))
 async def start(client: Client, msg: Message):
+    if not is_authorized(msg.from_user.id):
+        await msg.reply_text("Sorry, you are not authorized to use this bot.")
+        return
     user = await client.get_me()
     mention = user.mention
     start_message = await client.send_message(
@@ -659,6 +666,9 @@ async def txt_handler(bot: Client, m: Message):
 
 @bot.on_message(filters.command(["bravo"]) )
 async def txt_handler(bot: Client, m: Message):
+    if not is_authorized(msg.from_user.id):
+        await msg.reply_text("Sorry, you are not authorized to use this bot.")
+        return
     editable = await m.reply_text(f"**📁Send me the TXT file and wait.**")
     input: Message = await bot.listen(editable.chat.id)
     x = await input.download()
