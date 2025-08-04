@@ -87,9 +87,6 @@ class Data:
 # Define the start command handler
 @bot.on_message(filters.command("start"))
 async def start(client: Client, msg: Message):
-    if not is_authorized(msg.from_user.id):
-        await msg.reply_text("Sorry, you are not authorized to use this bot.")
-        return
     user = await client.get_me()
     mention = user.mention
     start_message = await client.send_message(
