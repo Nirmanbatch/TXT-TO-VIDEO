@@ -1182,7 +1182,7 @@ async def txt_handler(bot: Client, m: Message):
 
 # m3u8
 @bot.on_message(filters.command(["advance"]))
-    @authorized_only
+@authorized_only
 async def txt_handler(bot: Client, m: Message):
     editable = await m.reply_text(f"**🔹Send me the TXT file and wait.**")
     input: Message = await bot.listen(editable.chat.id)
