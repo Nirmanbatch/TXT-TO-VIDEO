@@ -666,10 +666,8 @@ async def txt_handler(bot: Client, m: Message):
 
 @bot.on_message(filters.command(["bravo"]) )
 async def txt_handler(bot: Client, m: Message):
-    if not 
-    is_authorized(msg.from_user.id):
-        await 
-        msg.reply_text("Sorry, you are not authorized to use this bot.")
+  if not is_authorized(msg.from_user.id):
+        await msg.reply_text("Sorry, you are not authorized to use this bot.")
         return
 
     editable = await m.reply_text(f"**📁Send me the TXT file and wait.**")
@@ -1182,10 +1180,8 @@ async def txt_handler(bot: Client, m: Message):
 
 @bot.on_message(filters.command(["advance"]))
 async def txt_handler(bot: Client, m: Message):
-    if not 
-    is_authorized(msg.from_user.id):
-        await 
-        msg.reply_text("Sorry, you are not authorized to use this bot.")
+    if not is_authorized(msg.from_user.id):
+        await msg.reply_text("Sorry, you are not authorized to use this bot.")
         return
     editable = await m.reply_text(f"**🔹Send me the TXT file and wait.**")
     input: Message = await bot.listen(editable.chat.id)
