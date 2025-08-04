@@ -26,19 +26,6 @@ from pyrogram.errors.exceptions.bad_request_400 import StickerEmojiInvalid
 from pyrogram.types.messages_and_media import message
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
-# Replace with your real Telegram user IDs
-AUTHORIZED_USERS = [5076431214]
-from functools import wraps
-
-def authorized_only(func):
-    @wraps(func)
-    async def wrapper(client, message, *args, **kwargs):
-        user_id = message.from_user.id
-        if user_id not in AUTHORIZED_USERS:
-            await message.reply_text("🚫 You are not authorized to use this bot.")
-            return
-        return await func(client, message, *args, **kwargs)
-    return wrapper
 # Initialize the bot
 bot = Client(
     "bot",
@@ -918,7 +905,6 @@ async def txt_handler(bot: Client, m: Message):
 # Ankitshakya
 
 @bot.on_message(filters.command(["spidy"]))
-@authorized_user
 async def txt_handler(bot: Client, m: Message):
     editable = await m.reply_text(f"**🔹Send me the TXT file and wait.**")
     input: Message = await bot.listen(editable.chat.id)
@@ -1182,7 +1168,6 @@ async def txt_handler(bot: Client, m: Message):
 
 # m3u8
 @bot.on_message(filters.command(["advance"]))
-@authorized_only
 async def txt_handler(bot: Client, m: Message):
     editable = await m.reply_text(f"**🔹Send me the TXT file and wait.**")
     input: Message = await bot.listen(editable.chat.id)
