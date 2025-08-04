@@ -672,13 +672,13 @@ async def txt_handler(bot: Client, m: Message):
 # Advance
 
 @bot.on_message(filters.command(["bravo"]) )
-  async def txt_handler(bot: Client, m: Message):
-    editable = await m.reply_text(f"**🔹Send me the TXT file and wait.**")
+async def txt_handler(bot: Client, m: Message):
+    editable = await m.reply_text(f"**📁Send me the TXT file and wait.**")
     input: Message = await bot.listen(editable.chat.id)
     x = await input.download()
     await input.delete(True)
     file_name, ext = os.path.splitext(os.path.basename(x))
-    credit = f"ＳＰＩＤΣＲ⚡"
+    credit = f"𝗦𝗣𝗜𝗗𝗬™🇮🇳"    
     
     try:    
         with open(x, "r") as f:
