@@ -672,7 +672,6 @@ async def txt_handler(bot: Client, m: Message):
 # Advance
 
 @bot.on_message(filters.command(["bravo"]) )
-@authorized_only
 async def txt_handler(bot: Client, m: Message):
   editable = await m.reply_text(f"**📁Send me the TXT file and wait.**")
     input: Message = await bot.listen(editable.chat.id)
