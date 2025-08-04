@@ -26,7 +26,19 @@ from pyrogram.errors.exceptions.bad_request_400 import StickerEmojiInvalid
 from pyrogram.types.messages_and_media import message
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
+# Replace with your real Telegram user IDs
+AUTHORIZED_USERS = [5076431214]
+from functools import wraps
 
+def authorized_only(func):
+    @wraps(func)
+    async def wrapper(client, message, *args, **kwargs):
+        user_id = message.from_user.id
+        if user_id not in AUTHORIZED_USERS:
+            await message.reply_text("🚫 You are not authorized to use this bot.")
+            return
+        return await func(client, message, *args, **kwargs)
+    return wrapper
 # Initialize the bot
 bot = Client(
     "bot",
@@ -87,6 +99,7 @@ class Data:
 # Define the start command handler
 @bot.on_message(filters.command("start"))
 async def start(client: Client, msg: Message):
+    @authorized_only
     user = await client.get_me()
     mention = user.mention
     start_message = await client.send_message(
@@ -659,7 +672,8 @@ async def txt_handler(bot: Client, m: Message):
 # Advance
 
 @bot.on_message(filters.command(["bravo"]) )
-async def txt_handler(bot: Client, m: Message):p
+async def txt_handler(bot: Client, m: Message):
+    @authorized_only
   editable = await m.reply_text(f"**📁Send me the TXT file and wait.**")
     input: Message = await bot.listen(editable.chat.id)
     x = await input.download()
@@ -1170,6 +1184,7 @@ async def txt_handler(bot: Client, m: Message):
 
 @bot.on_message(filters.command(["advance"]))
 async def txt_handler(bot: Client, m: Message):
+    @authorized_only
     editable = await m.reply_text(f"**🔹Send me the TXT file and wait.**")
     input: Message = await bot.listen(editable.chat.id)
     x = await input.download()
