@@ -98,8 +98,7 @@ class Data:
     )
 # Define the start command handler
 @bot.on_message(filters.command("start"))
-async def start(client: Client, msg: Message):
-    @authorized_only
+async def start(client: Client, msg: Message)
     user = await client.get_me()
     mention = user.mention
     start_message = await client.send_message(
